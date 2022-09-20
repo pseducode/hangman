@@ -4,8 +4,9 @@ class hanging:
     #Global variables
     mode=""
     soluition=""
-    guesses=[] #list of guesses already tried
-    wrongguesses=0 #number of incorrect letters guessed, max =  7 for easy mode (head,body,L-arm,R-arm,R-leg,L-leg, and hat),
+    wrongguesses=[] #list of guesses already tried, and are wrong
+    right guesses=[] #list of guesses, in the actual solution
+    numwrongguesses=0 #number of incorrect letters guessed, max =  7 for easy mode (head,body,L-arm,R-arm,R-leg,L-leg, and hat),
     #Medium & hard modes only get 6 (not hat)
     def __init__(self,hardness):
         self.mode =hardness #hardness can be easy, medium or hard, use external .txt wordlists
@@ -15,8 +16,19 @@ class hanging:
             #wordchoices
         #picksolution()
         
+
+    def makeguess(self,guess):
+        if (guess not in self.solution):
+            guesses.append(guess)
+            wrongguesses+=1
+            return False
+        else:
+            
+        
+        
     def gameover(self):
-        #True/False as to wether max guesses have been reached, or solution
+        #True/False as to wether max guesses have been reached, or solution met
+        return wrongguesses<6
         return false
 
     def picksolution(self):
