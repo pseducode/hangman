@@ -20,9 +20,9 @@ class hanging:
 
     def makeguess(self,guess):
         if (guess.lower() not in self.solution.lower()):
-            wrongguesses.append(guess)
+            self. wrongguesses.append(guess)
             numwrongguesses+=1
-            return False
+            print("your guess of: "+guess+"Was incorrect, sorry!")
         else:
             rightguesses.append(guess)
             
