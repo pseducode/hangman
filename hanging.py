@@ -3,11 +3,12 @@ class hanging:
     #class to keep track of hangman state (letters guessed, game solution,letters guessed so far and # of wrong guessed)
     #Global variables
     mode=""
-    soluition=""
+    solution=""
     wrongguesses=[] #list of guesses already tried, and are wrong
-    right guesses=[] #list of guesses, in the actual solution
+    rightguesses=[] #list of guesses, in the actual solution
     numwrongguesses=0 #number of incorrect letters guessed, max =  7 for easy mode (head,body,L-arm,R-arm,R-leg,L-leg, and hat),
     #Medium & hard modes only get 6 (not hat)
+    nonlets=('.',',','?','!')#non-letter characters in solution, possible
     def __init__(self,hardness):
         self.mode =hardness #hardness can be easy, medium or hard, use external .txt wordlists
         #pick random solution, from inuputted difficulty setting
@@ -18,18 +19,32 @@ class hanging:
         
 
     def makeguess(self,guess):
-        if (guess not in self.solution):
-            guesses.append(guess)
-            wrongguesses+=1
+        if (guess.lower() not in self.solution.lower()):
+            wrongguesses.append(guess)
+            numwrongguesses+=1
             return False
         else:
+            rightguesses.append(guess)
             
         
         
+    def drawsol(self):
+        board = ""
+        for letter in self.solution:
+            if(letter.lower() in rightguess):
+                board+=letter
+            elif(letter in nonlets):
+                board+=letter
+            else:
+                board+="_"
+            print(board)
+        
     def gameover(self):
         #True/False as to wether max guesses have been reached, or solution met
-        return wrongguesses<6
-        return false
+        if(self.numwrongguesses<6):
+            return False
+        else:
+            return True
 
     def picksolution(self):
         #At the astart of the game, pick the solution, based on the difficulty inputted at random, from appropriate wordlist
