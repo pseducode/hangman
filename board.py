@@ -13,7 +13,19 @@ class board:
             print("Congratulations! You won the game!")
         print("recorded wrongs is: "+str(self.numwrongguesses))
         print("acceptable wrong is: "+str(allowedwrong))
-        return self.numwrongguesses <allowedwrong or self.won
+        if(self.numwrongguesses <allowedwrong) and not self.won:
+            #haven't solved everything yet, and haven't gotten too many wrong, keep playing
+            return False
+        elif (self.numwrongguesses >=allowedwrong):
+            #guessed too many times, player lost and is hung
+            print("Sorry, That's too many guesses. you've lost the game.")
+            print("The solution was: "+self.solution)
+            return True
+        elif self.won:
+            print("Congratulations, you've won the game!")
+            return True
+            
+        return  self.numwrongguesses <allowedwrong or self.won
     def makeguess(self,guess):
         self.guesses.append(guess.lower())
         #return true is guess is in solution, false otherwise
@@ -48,6 +60,9 @@ class board:
                 todraw+=letter
         print("The current board is: ")
         print(todraw)
+        print("lowered todrawis: "+todraw.lower())
+        print("lowered solution is: "+self.solution.lower())
+        
         if(todraw.lower()==self.solution.lower()):
             self.won=True
         print("The value of won, is:"+str(self.won))
