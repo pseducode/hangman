@@ -1,4 +1,4 @@
-#more basic board, removing game logic, just tracks solution, and guesses
+ #more basic board, removing game logic, just tracks solution, and guesses
 class board2:
     solution="" #solution player is trying to guess
     numwrong=0 #number of incorrect guesses a player has made
@@ -14,8 +14,19 @@ class board2:
         self.wrongguess=[]
 
     def makeguess(guess):
-        pass
-    def returnboard(): #returmn solution so far
+        self.guesses.append(guess.lower())
+        if guess.lower() in self.solution:
+            return True
+        else:
+            self.numwrong+=1
+            return False
+    def howmanywrong():
+        #return number of wrong guesses made
+        return self.numwrong
+    def wrongletters():
+        #return list of all wrongly guessed letters
+        return self.wrongguess
+    def boardstatus(): #returmn solution so far
         pass
         
 
