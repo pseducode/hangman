@@ -18,7 +18,11 @@ def playgame(sol):
          print("The boardlooks like this currently: ")
          bstate = b.boardstatus()
          print(bstate)
-         print("to debug, bstate is: "+bstate+" and the sol is: "+sol)
+         if ('_' not in bstate):
+              print("Congratulations, you have won the game!")
+              gameover=True
+              continue
+         #print("to debug, bstate is: "+bstate+" and the sol is: "+sol)
          print("Please enter a guess for letter in solution: ")
          totry=input()
          state = b.makeguess(totry)
@@ -26,10 +30,9 @@ def playgame(sol):
              print("you made a correct guess!")
          else:
               print("you made an incorrect guess!")
-         if (bstate==sol):
-              print("Congratulations, you have won the game!")
-              gameover=True
-         elif(b.howmanywrong() >= allowedwrong):
+         
+              #gameover=True
+         if(b.howmanywrong() >= allowedwrong):
             print("Sorry, you've had to many incorrect guesseses. Game Over!")
             print("FYI, the solution was: "+sol)
             gameover=True
