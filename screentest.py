@@ -11,8 +11,8 @@ white= 255, 255,255
 screen = pygame.display.set_mode(size)
 
 stage = pygame.image.load("stage.png")
-base_font = pygame.font.Foint(None, 32)
+base_font = pygame.font.Font(None, 32)
 my_font = pygame.font.SysFont('Comic Sans MS', 30)
 solutionsurf = my_font.render('T _ st_ _ _ blah blash _ _ _ ',False,(0, 0,0))
 
-clock = 
+#clock = 
