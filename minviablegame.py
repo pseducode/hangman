@@ -45,6 +45,7 @@ def playgame2(sol):
     while not gameover: #main game loop
         stageimage=stageimages[b.howmanywrong()]#stage image to blit to screen
         gameboard = texttosurf(b.boardstatus()) #surface to blit onto screen
+        wrongguesses = texttosurf("Wrong guesses: "+b.wrongletters()) #surface of wrong letters to blit onto screen
         """while 1:
             for event in pygame.event.get():
                 if event.type ==pygame.QUIT: sys.exit()"""
@@ -53,6 +54,7 @@ def playgame2(sol):
         screen.fill(white )
         screen.blit(stageimage,(width-983, height-400))
         screen.blit(gameboard,(20,height-436))
+        screen.blit(wrongguesses,(20,height-50))
         pygame.display.flip()
         clock.tick()
         if('_' not in b.boardstatus()):
@@ -62,6 +64,7 @@ def playgame2(sol):
         print("Please enter a guess for letter in solution: ")
         totry=input()
         state = b.makeguess(totry)
+        print("currently wrong guesses are: "+b.wrongletters())
         if state:
             print("you made a correct guess!")
         else:

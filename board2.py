@@ -19,14 +19,18 @@ class board2:
             return True
         else:
             self.numwrong+=1
-            #self.wrongguess.append(guess)
+            #self .wrongguess.append(guess)
             return False
     def howmanywrong(self):
         #return number of wrong guesses made
         return self.numwrong
-    def wrongletters():
+    def wrongletters(self):
+        allwrong =""
+        for guess in self.guesses:
+            if guess not in self.solution.lower():
+                allwrong+=guess+ ", "
+        return allwrong
         #return list of all wrongly guessed letters
-        return self.wrongguess
     def boardstatus(self): #returmn solution so far
         todraw = ""
         for letter in self.solution:
