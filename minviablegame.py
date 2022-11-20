@@ -45,15 +45,32 @@ def playgame2(sol):
     while not gameover: #main game loop
         stageimage=stageimages[b.howmanywrong()]#stage image to blit to screen
         gameboard = texttosurf(b.boardstatus()) #surface to blit onto screen
-        #todo: actuall finish game loop by blitting stuff onto screen
         """while 1:
             for event in pygame.event.get():
                 if event.type ==pygame.QUIT: sys.exit()"""
-        screen.fill(black)
-        screen.blit(stageimage,(width-983, height-436))
-        screen.blit(gameboard,(width-gameboard.get_width(),height-gameboard.get_height()))
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT: sys.exit()
+        screen.fill(white )
+        screen.blit(stageimage,(width-983, height-400))
+        screen.blit(gameboard,(20,height-436))
         pygame.display.flip()
-        clock.tick(60)
+        clock.tick()
+        if('_' not in b.boardstatus()):
+            print("Congratulations, you have won the game!")
+            gameover=True
+            continue
+        print("Please enter a guess for letter in solution: ")
+        totry=input()
+        state = b.makeguess(totry)
+        if state:
+            print("you made a correct guess!")
+        else:
+            print("you made ab incorrect guess")
+        if(b.howmanywrong() >= allowedwrong):
+            print("Sorry, you've had too many incorrect guesses. Game Over!")
+            print("FYI, the solution was: "+sol)
+            gameover=True
+        
             
         
 def playgame(sol):
