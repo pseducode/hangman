@@ -13,7 +13,7 @@ allowedwrong=0 #number of allowed incorrect guesses before gameover, max =  7 fo
 def texttosurf(text):
     #todo, copy code from hanger class to convert string to blit-able surface
     my_font = pygame.font.SysFont('Comic Sans MS',32)
-    txtsuf= my_font.render(text,False,(0, 0, 0))
+    txtsurf= my_font.render(text,False,(0, 0, 0))
     return txtsurf
 def loadstages():
     global stageimages
@@ -37,10 +37,24 @@ def playgame2(sol):
     loadstages()
     gameover=False
     b=board2.board2(sol)
+    size = width, height = 1000, 600
+    black = 0, 0,0
+    white = 255, 255,255
+    screen = pygame.display.set_mode(size)
+    clock = pygame.time.Clock()
     while not gameover: #main game loop
-        stageimage= = stageimages[b.howmanywrong()]#stage image to blit to screen
+        stageimage=stageimages[b.howmanywrong()]#stage image to blit to screen
         gameboard = texttosurf(b.boardstatus()) #surface to blit onto screen
         #todo: actuall finish game loop by blitting stuff onto screen
+        """while 1:
+            for event in pygame.event.get():
+                if event.type ==pygame.QUIT: sys.exit()"""
+        screen.fill(black)
+        screen.blit(stageimage,(width-983, height-436))
+        screen.blit(gameboard,(width-gameboard.get_width(),height-gameboard.get_height()))
+        pygame.display.flip()
+        clock.tick(60)
+            
         
 def playgame(sol):
     #main game loop outside of main, for debugging purposes, solution is solution to game
@@ -101,7 +115,7 @@ def main2():
     solution = picksolution(level)
     print("alrighty then, given your chosen difficulty, the solution I've picked is:\n"+solution)
     print ("The number of possible wrong guiesses you havem given difficulty selected is: "+str(allowedwrong))
-    playgame(solution)
+    playgame2(solution)
     
 
 if __name__=="__main__":
