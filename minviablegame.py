@@ -7,9 +7,41 @@ import hanging
 import board2
 import random
 options =["easy","medium","hard"]
+stageimages = [] #list of images to load ondices map to number wrong, i.e 0 = just stage,
 allowedwrong=0 #number of allowed incorrect guesses before gameover, max =  7 for easy mode (head,body,L-arm,R-arm,R-leg,L-leg, and hat),
 #Medium & hard modes only get 6 (not hat)
-
+def texttosurf(text):
+    #todo, copy code from hanger class to convert string to blit-able surface
+    my_font = pygame.font.SysFont('Comic Sans MS',32)
+    txtsuf= my_font.render(text,False,(0, 0, 0))
+    return txtsurf
+def loadstages():
+    global stageimages
+    image1=pygame.image.load("stage.png")
+    stageimages.append(image1)
+    image2=pygame.image.load("stagehead.png")
+    stageimages.append(image2)
+    image3=pygame.image.load("stageHeadBody.png")
+    stageimages.append(image3)
+    stageimages.append(pygame.image.load("stageHeadBodyLArm.jpg"))
+    stageimages.append(pygame.image.load("stageHeadBodyLArmRarm.png"))
+    stageimages.append(pygame.image.load("stageHeadBodyArmsLleg.png"))
+    stageimages.append(pygame.image.load("stageHeadBodyArmsLlegs.png"))
+    stageimages.append(pygame.image.load("stageHeadBodyArmsLlegsHatSad.png"))
+    
+    #todo copy code from hanger class to load in stage graphics to global list
+def playgame2(sol):
+    #main game outside of main, for debugging purposes, sol is solution to game, this version uses graphics
+    pygame.init()
+    #initialize game stuff
+    loadstages()
+    gameover=False
+    b=board2.board2(sol)
+    while not gameover: #main game loop
+        stageimage= = stageimages[b.howmanywrong()]#stage image to blit to screen
+        gameboard = texttosurf(b.boardstatus()) #surface to blit onto screen
+        #todo: actuall finish game loop by blitting stuff onto screen
+        
 def playgame(sol):
     #main game loop outside of main, for debugging purposes, solution is solution to game
     gameover=False
