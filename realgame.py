@@ -31,6 +31,59 @@ def loadstages():
     stageimages.append(pygame.image.load("stageHeadBodyArmsLlegsHatSad.png"))
     
     #todo copy code from hanger class to load in stage graphics to global list
+def playgame4():
+    #actual game, including gameloop and what-not, w/ proper spacing, once debugged, etc, copy/paste to main game loop?
+    #first initstuff
+    pygame.init()
+    size = width, height = 1000, 600
+    back = 0, 0,0
+    white = pygame.display.set_mode(size)
+    loadstages() #load in stage graphics to global var
+    letterin = "" #input placeholder
+    modepicked = False #value to determine f have selected difficulty or not
+    clock = pygame.time.Clock()
+    while  True: #main game loop
+        if not modepicked: #haven't pivcked difficulty yet, ask for input/write input to screen
+            msg = texttosurf("Please enter difficulty level for this game (easy, medium or hard): "+letterin)
+        
+        #deal with input
+        for event in pygame.event.get():
+            if event.type ==pygame.QUIT():
+                sys.exit()
+            elif event.type == pygame.KEYDOWN: #usder pressed a key, deal wih it
+                if  event.key == pygame.K_BACKSPACE: #hit delete do delete inputted char
+                    letterin = letterin[:-1]
+                elif ((event.key== pygame.K_KP_ENTER) or (event.key == pygame.K_RETRURN)): #hit an enter key, validate it or whatever
+                    if not modepicked: #haven't picked a difficuly yet, check if entered is a valid option
+                        if letterin in options: #checked if entered either easy, medium or hard, is so setup game
+                            modepicked = True
+                            msg = texttosurf("Okay, now picking a solution of difficulty: "+letterin) #tell user entered valid difficulty
+                            solution = picksolution(letterin) #actually pick a solution at random
+                            b=board2.board2(solution) #initialize the board
+                            letterin = "" #reset input string
+                            
+                        else: #entered bad game mode, ask for reset.
+                            msg = texttosurf("Sorry, "+letterin+"is not a valid difficulty setting, please try again")
+                            letterin = ""
+                            
+                    else: #have picked a mode so see if good guess/not & update board
+                        state = b.makeguess(letterin)
+                        msg = texttosurf(b.boardstatus())
+                            
+                        
+                else: #entered non-special key, add to input
+                    letterin+= event.unicode
+                    
+                    
+                
+        #write shit to screen
+        stageimage = stageimages[b.howmanywrong()]#stage image to blit to screen
+        wrongguesses = texttosurf("Wrong guesses: "+b.wrongletters())
+        screen.fill(white)
+        screen.blit(stageimage,(width-983, height-400))
+        screen.blit(msg,(20, height-436))
+        screen.blit(wrongguesses,(20,height-50))
+    
 def playgame3():
     #actual game, once works/debugged copy/paste to main function/rename
     #first init stuff
@@ -42,6 +95,7 @@ def playgame3():
     loadstages()
     letterin = ""
     modepicked=False
+    clock =pygame.time.Clock()
     #first determine difficulty level to set game solution (easy, medium or hard)
     while True: # main game loop
         #while not modepicked:
@@ -50,8 +104,8 @@ def playgame3():
         #deal with input
         for event in pygame.event.get():
             if event.type ==pygame.QUIT():
-                sys.exit()
-            if event.type = pygame.KEYDOWN:
+                sys.exit()  
+            elif event.type = pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                     letterin = letterin[:-1]
                 elif ((event.key ==pygame.K_KP_ENTER) or (event.key == pygame.K_RETURN)):
@@ -65,14 +119,30 @@ def playgame3():
                             modepicked=True
                             solution = picksolution(letterin)
                             b=board2.board2(solution)
+                            loadstages()
                     else: #already have a solution check letter in solution etc
+                        state = b.makeguess(letterin)
+                        msg = 
                         
-                        
-                            
-                            
-                           
-                else:
+                             
+                                   
+                else: #didn't press enter or backspace, jusdt normal key
                     letterin+=event.unicode
+        #Now dealt with inpout draw screen
+        stageimage=stageimages[b.howmanywrong()] #stage image to blit onto screen
+        gameboard=texttosurf(b.boardstatus()) #gameboard to blit to screen
+        wrongguesses = texttosurf("Wrong guesses: "+b.wrongletters()) #surface with list of wrong letters to blit to screen
+        screen.fill(white)
+        screen.blit(stageimage,(width-983), height-400)
+        #determine whether to blit message for input of gameboard, then blit it to screen
+        if modepicked: #picked a mode so blit the board
+            screen.blit(gameboard,(20,height-400))
+        else: #haven't picked a mode, blit message
+            screen.blit(message,(20, height-400))
+        screen.blit(wrongguesses,(20,height-50))
+        pygame.display.flip()
+        clock.tick()
+                
                     
                     
             
@@ -168,7 +238,8 @@ def picksolution(mode):
     return(wordlist[random.randint(0,numoptions-1)])
 def main2():
     pygame.init()
-    #start main game loop
+    playgame4()
+    """#start main game loop
     
     modepicked=False
     print("Wlcome to my hangman game!")
@@ -185,7 +256,7 @@ def main2():
     solution = picksolution(level)
     print("alrighty then, given your chosen difficulty, the solution I've picked is:\n"+solution)
     print ("The number of possible wrong guiesses you havem given difficulty selected is: "+str(allowedwrong))
-    playgame2(solution)
+    playgame2(solution)"""
     
 
 if __name__=="__main__":
