@@ -1,0 +1,13 @@
+##re-think/cleanup of game loop psedfucode for hangman:
+
+def pressedkey(pyvent, gamemode): #interpret usaer input
+ def playgame(): #function to run game
+ ####initialization stuff
+	while keep playing: #game over/ end condition for whjjole game
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT(): #exit condition
+				sys.exit
+			elif  event.type == pygame.KEYDOWN:
+			gamestate = pressedkey(event, modepicked)
+			drawboard(screen,gameboard)
+		

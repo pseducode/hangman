@@ -48,7 +48,7 @@ def playgame4():
         
         #deal with input
         for event in pygame.event.get():
-            if event.type ==pygame.QUIT():
+            if event.type==pygame.QUIT():
                 sys.exit()
             elif event.type == pygame.KEYDOWN: #usder pressed a key, deal wih it
                 if  event.key == pygame.K_BACKSPACE: #hit delete do delete inputted char
@@ -102,16 +102,16 @@ def playgame3():
             #need to set difficulty before starting gameplay
             message =texttosurf("please enter difficulty level for this game (easy medium, or hard): "+letterin)
         #deal with input
-        for event in pygame.event.get():
+        #for event in pygame.event.get():
             if event.type ==pygame.QUIT():
                 sys.exit()  
-            elif event.type = pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_BACKSPACE:
                     letterin = letterin[:-1]
                 elif ((event.key ==pygame.K_KP_ENTER) or (event.key == pygame.K_RETURN)):
                     #pressed enter/return so validate input
                     if not modepicked: #haven't picked difficulty yet, see if proper diff level
-                        if (letterin not in options:
+                        if (letterin not in options):
                             message = texttosurf("Sorry, "+letterin+" is not a valid difficul;ty level, please try another: ")
                         else:
                             #entered a valid difficulty level, pick a solution, and init board
@@ -122,26 +122,26 @@ def playgame3():
                             loadstages()
                     else: #already have a solution check letter in solution etc
                         state = b.makeguess(letterin)
-                        msg = 
+                        msg = texttosurf(b.boardstatus())
                         
                              
                                    
                 else: #didn't press enter or backspace, jusdt normal key
                     letterin+=event.unicode
         #Now dealt with inpout draw screen
-        stageimage=stageimages[b.howmanywrong()] #stage image to blit onto screen
-        gameboard=texttosurf(b.boardstatus()) #gameboard to blit to screen
-        wrongguesses = texttosurf("Wrong guesses: "+b.wrongletters()) #surface with list of wrong letters to blit to screen
-        screen.fill(white)
-        screen.blit(stageimage,(width-983), height-400)
+        #stageimage=stageimages[b.howmanywrong()] #stage image to blit onto screen
+        #gameboard=texttosurf(b.boardstatus()) #gameboard to blit to screen
+        #"""wrongguesses = texttosurf("Wrong guesses: "+b.wrongletters()) #surface with list of wrong letters to blit to screen
+        #screen.fill(white)
+        #screen.blit(stageimage,(width-983), height-400)
         #determine whether to blit message for input of gameboard, then blit it to screen
-        if modepicked: #picked a mode so blit the board
-            screen.blit(gameboard,(20,height-400))
-        else: #haven't picked a mode, blit message
-            screen.blit(message,(20, height-400))
-        screen.blit(wrongguesses,(20,height-50))
-        pygame.display.flip()
-        clock.tick()
+        #if modepicked: #picked a mode so blit the board
+        #    screen.blit(gameboard,(20,height-400))
+        #else: #haven't picked a mode, blit message
+         #   screen.blit(message,(20, height-400))
+        #screen.blit(wrongguesses,(20,height-50))
+        #pygame.display.flip()
+        #clock.tick()"""
                 
                     
                     
@@ -237,7 +237,7 @@ def picksolution(mode):
         allowedwrong=6
     return(wordlist[random.randint(0,numoptions-1)])
 def main2():
-    pygame.init()
+#    pygame.init()
     playgame4()
     """#start main game loop
     
