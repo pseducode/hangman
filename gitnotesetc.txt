@@ -1,0 +1,25 @@
+git/github notes/commands
+
+guide here = https://docs.github.com/en/get-started/quickstart/set-up-git
+
+Also: https://docs.github.com/en/get-started/using-git/about-git
+
+git username = pseducode fyi email = 10664638+pseducode@users.noreply.github.com
+
+
+
+Create new repo locally:
+	1.) cd to intended parent directory (in cmd), then do command git init <repo name>
+	2.) cd to new directory, created 
+	3.) add first file to it (on linux, would use touch command), but because windows, do:
+		type nul > README.md 
+	4.) git add README.md-> make git aware of file (can also use -A flag to stage all)
+	5.) git commit -m "ad README to initial commit" -> take snapshot of the staging area 
+	6.) git remote add origin https://github.com/psedicode/<repo>.git -> provide path for the repo created on git hub
+	7.) git push origin HEAD:master -> (can substitute master for other branches though)-> pushes changes to github
+	
+	further command, here: https://docs.github.com/en/get-started/using-git/about-git
+	
+	
+	
+	
